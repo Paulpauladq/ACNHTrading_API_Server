@@ -12,19 +12,13 @@
 /* global db print */
 /* eslint no-restricted-globals: "off" */
 
-db.listings.remove({});
-db.offers.remove({});
-db.users.remove({});
-db.deleted_listings.remove({});
-db.deleted_offers.remove({});
+db.listings.drop();
+db.offers.drop();
+db.acnhers.drop();
+db.deleted_listings.drop();
+db.deleted_offers.drop();
+db.counters.drop();
 
-db.counters.remove({ _id: 'listings' });
-db.counters.remove({ _id: 'offers' });
-db.counters.remove({ _id: 'users' });
-
-db.listings.dropIndexes();
-db.offers.dropIndexes();
-db.users.dropIndexes();
 db.items.dropIndexes();
 db.villagers.dropIndexes();
 db.recipes.dropIndexes();
@@ -123,10 +117,10 @@ const offersDB = [
   },
 ];
 
-const usersDB = [
+const acnhersDB = [
   {
     id: 1,
-    username: 'ppt',
+    nickname: 'ppt',
     email: 'ppt@gmail.com',
     switchId: '1111-1111-1111',
     islandName: 'ppt_island',
@@ -135,7 +129,7 @@ const usersDB = [
   },
   {
     id: 2,
-    username: 'sfz',
+    nickname: 'sfz',
     email: 'sfz@gmail.com',
     switchId: '2222-2222-2222',
     islandName: 'sfz_island',
@@ -146,19 +140,19 @@ const usersDB = [
 
 db.listings.insertMany(listingsDB);
 db.offers.insertMany(offersDB);
-db.users.insertMany(usersDB);
+db.acnhers.insertMany(acnhersDB);
 
 const listingCount = db.listings.count();
 const offerCount = db.offers.count();
-const userCount = db.users.count();
+const acnherCount = db.acnhers.count();
 
 print('Inserted', listingCount, 'listings');
 print('Inserted', offerCount, 'offers');
-print('Inserted', userCount, 'users');
+print('Inserted', acnherCount, 'acnhers');
 
 db.counters.insert({ _id: 'listings', current: listingCount });
 db.counters.insert({ _id: 'offers', current: offerCount });
-db.counters.insert({ _id: 'users', current: userCount });
+db.counters.insert({ _id: 'acnhers', current: acnherCount });
 
 db.listings.createIndex({ id: 1 }, { unique: true });
 db.listings.createIndex({ status: 1 });
@@ -177,12 +171,12 @@ db.offers.createIndex({ buyerId: 1 });
 
 db.deleted_offers.createIndex({ id: 1 }, { unique: true });
 
-db.users.createIndex({ id: 1 }, { unique: true });
-db.users.createIndex({ username: 1 });
-db.users.createIndex({ email: 1 }, { unique: true });
-db.users.createIndex({ switchId: 1 }, { unique: true });
-db.users.createIndex({
-  username: 'text', email: 'text', switchId: 'text', islandName: 'text',
+db.acnhers.createIndex({ id: 1 }, { unique: true });
+db.acnhers.createIndex({ nickname: 1 });
+db.acnhers.createIndex({ email: 1 }, { unique: true });
+db.acnhers.createIndex({ switchId: 1 }, { unique: true });
+db.acnhers.createIndex({
+  nickname: 'text', email: 'text', switchId: 'text', islandName: 'text',
 });
 
 // use mongo import 4 json data file

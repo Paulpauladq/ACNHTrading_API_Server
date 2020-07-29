@@ -50,12 +50,12 @@ type OfferListWithPages {
   pages: Int
 }
 
-type User {
+type Acnher {
   _id: ID!
   id: Int!
   signedIn: Boolean!
   email: String!
-  username: String
+  nickname: String
   switchId: String
   islandName: String
   villagerList: [String!]
@@ -63,8 +63,8 @@ type User {
   created: GraphQLDate!
 }
 
-type UserListWithPages {
-  offers: [User!]!
+type AcnherListWithPages {
+  offers: [Acnher!]!
   pages: Int
 }
 
@@ -104,17 +104,17 @@ input OfferUpdateInputs {
   productCount: Int
 }
 
-input UserInputs {
+input AcnherInputs {
   email: String!
-  username: String
+  nickname: String
   switchId: String
   islandName: String
   villagerList: [String!]
   wishlist: [String!]
 }
 
-input UserUpdateInputs {
-  username: String
+input AcnherUpdateInputs {
+  nickname: String
   switchId: String
   islandName: String
   villagerList: [String!]
@@ -193,11 +193,11 @@ type Query {
     buyerId: Int
     page: Int = 1
   ): ListingListWithPages
-  user: User!
-  userList(
+  acnher: Acnher!
+  acnherList(
     search: String
     page: Int = 1
-  ): UserListWithPages
+  ): AcnherListWithPages
   item: Item!
   itemList(
     sourceSheet: String
@@ -233,6 +233,6 @@ type Mutation {
   offerUpdate(id: Int!, changes: OfferUpdateInputs!): Offer!
   offerDelete(id: Int!): Boolean!
   offerRestore(id: Int!): Boolean!
-  userAdd(user: UserInputs!): User!
-  userUpdate(id: Int!, changes: UserUpdateInputs!): User!
+  acnherAdd(acnher: AcnherInputs!): Acnher!
+  acnherUpdate(id: Int!, changes: AcnherUpdateInputs!): Acnher!
 }
