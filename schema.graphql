@@ -24,7 +24,6 @@ type Listing {
   productId: String!
   productCount: Int!
   created: GraphQLDate!
-  expired: GraphQLDate
   note: String
   priceList: [ListingPrice!]!
 }
@@ -77,7 +76,6 @@ input ListingInputs {
   sellerId: Int!
   productId: String!
   productCount: Int!
-  expired: GraphQLDate
   note: String
   priceList: [ListingPriceInputs!]!
 }
@@ -86,7 +84,6 @@ input ListingUpdateInputs {
   status: ListingStatus
   productId: String
   productCount: Int
-  expired: GraphQLDate
   note: String
   priceList: [ListingPriceInputs!]
 }
@@ -184,8 +181,7 @@ type Query {
     status: ListingStatus
     sellerId: Int
     productId: String
-    created: GraphQLDate
-    expired: GraphQLDate
+    page: Int = 1
   ): ListingListWithPages
   offer: Offer!
   offerList(
@@ -193,29 +189,35 @@ type Query {
     listingId: Int
     sellerId: Int
     buyerId: Int
+    page: Int = 1
   ): ListingListWithPages
   user: User!
   userList(
     search: String
+    page: Int = 1
   ): UserListWithPages
   item: Item!
   itemList(
     sourceSheet: String
     search: String
+    page: Int = 1
   ): ItemListWithPages
   recipe: Recipe!
   recipeList(
     search: String
+    page: Int = 1
   ): RecipeListWithPages
   villager: Villager!
   villagerList(
     personality: String
     species: String
     search: String
+    page: Int = 1
   ): VillagerListWithPages
   nookmile: Nookmile!
   nookmileList(
     search: String
+    page: Int = 1
   ): NookmileListWithPages
 }
 
