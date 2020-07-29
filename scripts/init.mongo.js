@@ -15,6 +15,8 @@
 db.listings.remove({});
 db.offers.remove({});
 db.users.remove({});
+db.deleted_listings.remove({});
+db.deleted_offers.remove({});
 
 const listingsDB = [
   {
@@ -157,15 +159,21 @@ db.listings.createIndex({ product_id: 1 });
 db.listings.createIndex({ created: 1 });
 db.listings.createIndex({ expired: 1 });
 
+db.deleted_listings.createIndex({ id: 1 }, { unique: true });
+
 db.offers.createIndex({ id: 1 }, { unique: true });
 db.offers.createIndex({ status: 1 });
 db.offers.createIndex({ listing_id: 1 });
 db.offers.createIndex({ seller_id: 1 });
 db.offers.createIndex({ buyer_id: 1 });
 
+db.deleted_offers.createIndex({ id: 1 }, { unique: true });
+
 db.users.createIndex({ id: 1 }, { unique: true });
 db.users.createIndex({ username: 1 });
+db.users.createIndex({ email: 1 }, { unique: true });
 db.users.createIndex({ switch_id: 1 }, { unique: true });
+db.users.createIndex({ 'username': 'text', 'email': 'text', 'switch_id': 'text', 'island_name': 'text', });
 
 // use mongo import 4 json data file
 db.items.createIndex({ 'variants.uniqueEntryId': 1 }, { unique: true });

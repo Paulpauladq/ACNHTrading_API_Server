@@ -1,90 +1,233 @@
 scalar GraphQLDate
 
-enum StatusType {
+enum ListingStatus {
   New
-  Assigned
-  Fixed
   Closed
 }
 
-type Issue {
+enum OfferStatus {
+  New
+  Rejected
+  Accepted
+}
+
+type ListingPrice {
+  product_id: String!
+  product_count: Int!
+}
+
+type Listing {
   _id: ID!
   id: Int!
-  title: String!
-  status: StatusType!
-  owner: String
-  effort: Int
+  status: ListingStatus!
+  seller_id: Int!
+  product_id: String!
+  product_count: Int!
   created: GraphQLDate!
-  due: GraphQLDate
-  description: String
+  expired: GraphQLDate
+  note: String
+  price_list: [ListingPrice!]!
 }
 
-type IssueCounts {
-  owner: String!
-  New: Int
-  Assigned: Int
-  Fixed: Int
-  Closed: Int
+type ListingListWithPages {
+  listings: [Listing!]!
+  pages: Int
 }
 
-type IssueListWithPages {
-  issues: [Issue!]!
+type Offer {
+  _id: ID!
+  id: Int!
+  status: OfferStatus!
+  listing_id: Int!
+  seller_id: Int!
+  buyer_id: Int!
+  product_id: String!
+  product_count: Int!
+}
+
+type OfferListWithPages {
+  offers: [Offer!]!
   pages: Int
 }
 
 type User {
+  _id: ID!
+  id: Int!
   signedIn: Boolean!
-  givenName: String
-  name: String
-  email: String
+  email: String!
+  username: String
+  switch_id: String
+  island_name: String
+  villager_list: [String!]
+  wishlist: [String!]
 }
 
-"Toned down Issue, used as inputs, without server generated values."
-input IssueInputs {
-  title: String!
-  "Optional, if not supplied, will be set to 'New'"
-  status: StatusType = New
-  owner: String
-  effort: Int
-  due: GraphQLDate
-  description: String
+type UserListWithPages {
+  offers: [User!]!
+  pages: Int
 }
 
-"""Inputs for issueUpdate: all are optional. Whichever is specified will
-be set to the given value, undefined fields will remain unmodified."""
-input IssueUpdateInputs {
-  title: String
-  status: StatusType
-  owner: String
-  effort: Int
-  due: GraphQLDate
-  description: String
+"For Mutation"
+input ListingPriceInputs {
+  product_id: String!
+  product_count: Int!
+}
+
+input ListingInputs {
+  seller_id: Int!
+  product_id: String!
+  product_count: Int!
+  expired: GraphQLDate
+  note: String
+  price_list: [ListingPriceInputs!]!
+}
+
+input ListingUpdateInputs {
+  status: ListingStatus
+  product_id: String
+  product_count: Int
+  expired: GraphQLDate
+  note: String
+  price_list: [ListingPriceInputs!]
+}
+
+input OfferInputs {
+  listing_id: Int!
+  seller_id: Int!
+  buyer_id: Int!
+  product_id: String!
+  product_count: Int!
+}
+
+input OfferUpdateInputs {
+  status: OfferStatus
+  product_id: String
+  product_count: Int
+}
+
+input UserInputs {
+  email: String!
+  username: String
+  switch_id: String
+  island_name: String
+  villager_list: [String!]
+  wishlist: [String!]
+}
+
+input UserUpdateInputs {
+  username: String
+  switch_id: String
+  island_name: String
+  villager_list: [String!]
+  wishlist: [String!]
+}
+
+"Data for Animal Crossing New Horizons"
+type Item {
+  _id: ID!
+  uniqueEntryId: String!
+  name: String!
+  sourceSheet: String!
+  image: String!
+}
+
+type ItemListWithPages {
+  items: [Item!]!
+  pages: Int
+}
+
+type Recipe {
+  _id: ID!
+  uniqueEntryId: String!
+  name: String!
+  category: String!
+  image: String!
+}
+
+type RecipeListWithPages {
+  recipes: [Recipe!]!
+  pages: Int
+}
+
+type Villager {
+  _id: ID!
+  uniqueEntryId: String!
+  name: String!
+  personality: String!
+  species: String!
+  image: String!
+}
+
+type VillagerListWithPages {
+  villagers: [Villager!]!
+  pages: Int
+}
+
+type Nookmile {
+  _id: ID!
+  uniqueEntryId: String!
+  name: String!
+  category: String!
+  image: String!
+}
+
+type NookmileListWithPages {
+  nookmiles: [Nookmile!]!
+  pages: Int
 }
 
 ##### Top level declarations
-
 type Query {
   about: String!
+  listing: Listing!
+  listingList(
+    status: ListingStatus
+    seller_id: Int
+    product_id: String
+    created: GraphQLDate
+    expired: GraphQLDate
+  ): ListingListWithPages
+  offer: Offer!
+  offerList(
+    status: OfferStatus
+    listing_id: Int
+    seller_id: Int
+    buyer_id: Int
+  ): ListingListWithPages
   user: User!
-  issueList(
-    status: StatusType
-    effortMin: Int
-    effortMax: Int
+  userList(
     search: String
-    page: Int = 1
-  ): IssueListWithPages
-  issue(id: Int!): Issue!
-  issueCounts(
-    status: StatusType
-    effortMin: Int
-    effortMax: Int
-  ): [IssueCounts!]!
+  ): UserListWithPages
+  item: Item!
+  itemList(
+    sourceSheet: String
+    search: String
+  ): ItemListWithPages
+  recipe: Recipe!
+  recipeList(
+    search: String
+  ): RecipeListWithPages
+  villager: Villager!
+  villagerList(
+    personality: String
+    species: String
+    search: String
+  ): VillagerListWithPages
+  nookmile: Nookmile!
+  nookmileList(
+    search: String
+  ): NookmileListWithPages
 }
 
 type Mutation {
-  setAboutMessage(message: String!): String
-  issueAdd(issue: IssueInputs!): Issue!
-  issueUpdate(id: Int!, changes: IssueUpdateInputs!): Issue!
-  issueDelete(id: Int!): Boolean!
-  issueRestore(id: Int!): Boolean!
+  lisingAdd(listing: ListingInputs!): Listing!
+  lisingUpdate(id: Int!, changes: ListingUpdateInputs!): Listing!
+  lisingDelete(id: Int!): Boolean!
+  lisingRestore(id: Int!): Boolean!
+  offerAdd(offer: OfferInputs!): Offer!
+  offerUpdate(id: Int!, changes: OfferUpdateInputs!): Offer!
+  offerDelete(id: Int!): Boolean!
+  offerRestore(id: Int!): Boolean!
+  userAdd(user: UserInputs!): User!
+  userUpdate(id: Int!, changes: UserUpdateInputs!): User!
 }
