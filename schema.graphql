@@ -234,10 +234,10 @@ type Query {
 
 type Mutation {
   setAboutMessage(message: String!): String
-  lisingAdd(listing: ListingInputs!): Listing!
-  lisingUpdate(id: Int!, changes: ListingUpdateInputs!): Listing!
-  lisingDelete(id: Int!): Boolean!
-  lisingRestore(id: Int!): Boolean!
+  listingAdd(listing: ListingInputs!): Listing!
+  listingUpdate(id: Int!, changes: ListingUpdateInputs!): Listing!
+  listingDelete(id: Int!): Boolean!
+  listingRestore(id: Int!): Boolean!
   offerAdd(offer: OfferInputs!): Offer!
   offerUpdate(id: Int!, changes: OfferUpdateInputs!): Offer!
   offerDelete(id: Int!): Boolean!
