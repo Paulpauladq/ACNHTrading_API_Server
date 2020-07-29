@@ -2,7 +2,7 @@ const { getDb } = require('./db.js');
 
 async function get(_, { uniqueEntryId }) {
   const db = getDb();
-  const item = await db.collection('items').findOne({ uniqueEntryId });
+  const item = await db.collection('items').findOne({ 'variants.uniqueEntryId': uniqueEntryId });
   return item;
 }
 

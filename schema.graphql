@@ -64,7 +64,7 @@ type Acnher {
 }
 
 type AcnherListWithPages {
-  offers: [Acnher!]!
+  acnhers: [Acnher!]!
   pages: Int
 }
 
@@ -122,12 +122,16 @@ input AcnherUpdateInputs {
 }
 
 "Data for Animal Crossing New Horizons"
+type itemVariant {
+  image: String!
+  uniqueEntryId: String!
+}
+
 type Item {
   _id: ID!
-  uniqueEntryId: String!
   name: String!
   sourceSheet: String!
-  image: String!
+  variants: [itemVariant!]!
 }
 
 type ItemListWithPages {
@@ -154,7 +158,7 @@ type Villager {
   name: String!
   personality: String!
   species: String!
-  image: String!
+  iconImage: String!
 }
 
 type VillagerListWithPages {
@@ -187,45 +191,45 @@ type User {
 type Query {
   about: String!
   user: User!
-  listing: Listing!
+  listing(id: Int!): Listing!
   listingList(
     status: ListingStatus
     sellerId: Int
     productId: String
     page: Int = 1
   ): ListingListWithPages
-  offer: Offer!
+  offer(id: Int!): Offer!
   offerList(
     status: OfferStatus
     listingId: Int
     sellerId: Int
     buyerId: Int
     page: Int = 1
-  ): ListingListWithPages
-  acnher: Acnher!
+  ): OfferListWithPages
+  acnher(id: Int!): Acnher!
   acnherList(
     search: String
     page: Int = 1
   ): AcnherListWithPages
-  item: Item!
+  item(uniqueEntryId: String!): Item!
   itemList(
     sourceSheet: String
     search: String
     page: Int = 1
   ): ItemListWithPages
-  recipe: Recipe!
+  recipe(uniqueEntryId: String!): Recipe!
   recipeList(
     search: String
     page: Int = 1
   ): RecipeListWithPages
-  villager: Villager!
+  villager(uniqueEntryId: String!): Villager!
   villagerList(
     personality: String
     species: String
     search: String
     page: Int = 1
   ): VillagerListWithPages
-  nookmile: Nookmile!
+  nookmile(uniqueEntryId: String!): Nookmile!
   nookmileList(
     search: String
     page: Int = 1

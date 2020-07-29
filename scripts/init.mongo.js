@@ -51,7 +51,7 @@ const listingsDB = [
   },
   {
     id: 2,
-    status: 'Pending',
+    status: 'New',
     sellerId: 2,
     productId: 'XAnaYsJ8wouWyBBsu',
     productCount: 3,
