@@ -2,61 +2,183 @@
  * Run using the mongo shell. For remote databases, ensure that the
  * connection string is supplied in the command line. For example:
  * localhost:
- *   mongo issuetracker scripts/init.mongo.js
+ *   mongo acnhtrading scripts/init.mongo.js
  * Atlas:
- *   mongo mongodb+srv://user:pwd@xxx.mongodb.net/issuetracker scripts/init.mongo.js
+ *   mongo mongodb+srv://user:pwd@xxx.mongodb.net/acnhtrading scripts/init.mongo.js
  * MLab:
- *   mongo mongodb://user:pwd@xxx.mlab.com:33533/issuetracker scripts/init.mongo.js
+ *   mongo mongodb://user:pwd@xxx.mlab.com:33533/acnhtrading scripts/init.mongo.js
  */
 
 /* global db print */
 /* eslint no-restricted-globals: "off" */
 
-db.issues.remove({});
-db.deleted_issues.remove({});
+db.listings.remove({});
+db.offers.remove({});
+db.users.remove({});
 
-const issuesDB = [
+const listingsDB = [
   {
     id: 1,
     status: 'New',
-    owner: 'Ravan',
-    effort: 5,
-    created: new Date('2019-01-15'),
-    due: undefined,
-    title: 'Error in console when clicking Add',
-    description: 'Steps to recreate the problem:'
-                 + '\n1. Refresh the browser.'
-                 + '\n2. Select "New" in the filter'
-                 + '\n3. Refresh the browser again. Note the warning in the console:'
-                 + '\n   Warning: Hash history cannot PUSH the same path; a new entry'
-                 + '\n   will not be added to the history stack'
-                 + '\n4. Click on Add.'
-                 + '\n5. There is an error in console, and add doesn\'t work.',
+    seller_id: 1,
+    product_id: 'EpywQXABBcv2dipsP',
+    product_count: 1,
+    created: new Date('2020-07-13'),
+    expired: undefined,
+    note: 'Don\'t send me empty offers.',
+    price_list: [
+      {
+        product_id: "bell",
+        product_count: 1000000,
+      },
+      {
+        product_id: "FAn9xRZvpBRAad3E6",
+        product_count: 20,
+      },
+      {
+        product_id: "J4inuBziPCSGZNEPM",
+        product_count: 2,
+      },
+    ],
   },
   {
     id: 2,
-    status: 'Assigned',
-    owner: 'Eddie',
-    effort: 14,
-    created: new Date('2019-01-16'),
-    due: new Date('2019-02-01'),
-    title: 'Missing bottom border on panel',
-    description: 'There needs to be a border in the bottom in the panel'
-                 + ' that appears when clicking on Add',
+    status: 'Pending',
+    seller_id: 2,
+    product_id: "XAnaYsJ8wouWyBBsu",
+    product_count: 3,
+    created: new Date('2020-07-15'),
+    expired: undefined,
+    note: 'Yohooooooooo',
+    price_list: [
+      {
+        product_id: "FAn9xRZvpBRAad3E6",
+        product_count: 20,
+      },
+      {
+        product_id: "t2LzAKDofAZYyqZ6r",
+        product_count: 2,
+      },
+    ],
+  },
+  {
+    id: 3,
+    status: 'Closed',
+    seller_id: 1,
+    product_id: "54WzSWz3bv4j4279w",
+    product_count: 1,
+    created: new Date('2020-07-10'),
+    expired: undefined,
+    note: 'Accepting touch trade',
+    price_list: [
+      {
+        product_id: "6wyLNus8QqXkbBu72",
+        product_count: 1,
+      },
+    ],
   },
 ];
 
-db.issues.insertMany(issuesDB);
-const count = db.issues.count();
-print('Inserted', count, 'issues');
+const offersDB = [
+  {
+    id: 1,
+    status: 'New',
+    listing_id: 2,
+    seller_id: 2,
+    buyer_id: 1,
+    product_id: "FAn9xRZvpBRAad3E6",
+    product_count: 20,
+  },
+  {
+    id: 2,
+    status: 'Rejected',
+    listing_id: 3,
+    seller_id: 1,
+    buyer_id: 2,
+    product_id: "6wyLNus8QqXkbBu72",
+    product_count: 1,
+  },
+  {
+    id: 3,
+    status: 'Accepted',
+    listing_id: 1,
+    seller_id: 1,
+    buyer_id: 2,
+    product_id: "bell",
+    product_count: 1000000,
+  },
+];
 
-db.counters.remove({ _id: 'issues' });
-db.counters.insert({ _id: 'issues', current: count });
+const usersDB = [
+  {
+    id: 1,
+    username: 'ppt',
+    email: 'ppt@gmail.com',
+    switch_id: '1111-1111-1111',
+    island_name: 'ppt_island',
+    villager_list: ["B3RyfNEqwGmcccRC3"],
+    wishlist: ["QiRLGPEKXAy9CnsnD", "EFHuxMqC34e4se2EB", "dRTnqq9pYTtLGmZZt"],
+  },
+  {
+    id: 2,
+    username: 'sfz',
+    email: 'sfz@gmail.com',
+    switch_id: '2222-2222-2222',
+    island_name: 'sfz_island',
+    villager_list: ["SGMdki6dzpDZyXAw5"],
+    wishlist: ["dRTnqq9pYTtLGmZZt", "ihA8W7QC64yvcX4Dd", "hyZvWM6kXL5S7qcbN"],
+  },
+];
 
-db.issues.createIndex({ id: 1 }, { unique: true });
-db.issues.createIndex({ status: 1 });
-db.issues.createIndex({ owner: 1 });
-db.issues.createIndex({ created: 1 });
-db.issues.createIndex({ title: 'text', description: 'text' });
+db.listings.insertMany(listingsDB);
+db.offers.insertMany(offersDB);
+db.users.insertMany(usersDB);
 
-db.deleted_issues.createIndex({ id: 1 }, { unique: true });
+const listing_count = db.listings.count();
+const offer_count = db.offers.count();
+const user_count = db.users.count();
+
+print('Inserted', listing_count, 'listings');
+print('Inserted', offer_count, 'offers');
+print('Inserted', user_count, 'users');
+
+db.counters.remove({ _id: 'listings' });
+db.counters.remove({ _id: 'offers' });
+db.counters.remove({ _id: 'users' });
+
+db.counters.insert({ _id: 'listings', current: listing_count });
+db.counters.insert({ _id: 'offers', current: offer_count });
+db.counters.insert({ _id: 'users', current: user_count });
+
+db.listings.createIndex({ id: 1 }, { unique: true });
+db.listings.createIndex({ status: 1 });
+db.listings.createIndex({ seller_id: 1 });
+db.listings.createIndex({ product_id: 1 });
+db.listings.createIndex({ created: 1 });
+db.listings.createIndex({ expired: 1 });
+
+db.offers.createIndex({ id: 1 }, { unique: true });
+db.offers.createIndex({ status: 1 });
+db.offers.createIndex({ listing_id: 1 });
+db.offers.createIndex({ seller_id: 1 });
+db.offers.createIndex({ buyer_id: 1 });
+
+db.users.createIndex({ id: 1 }, { unique: true });
+db.users.createIndex({ username: 1 });
+db.users.createIndex({ switch_id: 1 }, { unique: true });
+
+// use mongo import 4 json data file
+db.items.createIndex({ 'variants.uniqueEntryId': 1 }, { unique: true });
+db.items.createIndex({ 'sourceSheet': 1 });
+db.items.createIndex({ 'name': 'text' });
+
+db.villagers.createIndex({ 'uniqueEntryId': 1 }, { unique: true });
+db.villagers.createIndex({ 'personality': 1 });
+db.villagers.createIndex({ 'species': 1 });
+db.villagers.createIndex({ 'name': 'text' });
+
+db.recipes.createIndex({ 'uniqueEntryId': 1 }, { unique: true });
+db.recipes.createIndex({ 'name': 'text' });
+
+db.nookmiles.createIndex({ 'uniqueEntryId': 1 }, { unique: true });
+db.nookmiles.createIndex({ 'name': 'text' });
