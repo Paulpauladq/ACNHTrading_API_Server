@@ -18,6 +18,18 @@ db.users.remove({});
 db.deleted_listings.remove({});
 db.deleted_offers.remove({});
 
+db.counters.remove({ _id: 'listings' });
+db.counters.remove({ _id: 'offers' });
+db.counters.remove({ _id: 'users' });
+
+db.listings.dropIndexes();
+db.offers.dropIndexes();
+db.users.dropIndexes();
+db.items.dropIndexes();
+db.villagers.dropIndexes();
+db.recipes.dropIndexes();
+db.nookmiles.dropIndexes();
+
 const listingsDB = [
   {
     id: 1,
@@ -143,10 +155,6 @@ const userCount = db.users.count();
 print('Inserted', listingCount, 'listings');
 print('Inserted', offerCount, 'offers');
 print('Inserted', userCount, 'users');
-
-db.counters.remove({ _id: 'listings' });
-db.counters.remove({ _id: 'offers' });
-db.counters.remove({ _id: 'users' });
 
 db.counters.insert({ _id: 'listings', current: listingCount });
 db.counters.insert({ _id: 'offers', current: offerCount });
