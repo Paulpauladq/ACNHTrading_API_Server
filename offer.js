@@ -36,6 +36,7 @@ async function add(_, { offer }) {
   const newOffer = Object.assign({}, offer);
 
   newOffer.status = 'New';
+  newOffer.created = new Date();
   newOffer.id = await getNextSequence('offers');
 
   const result = await db.collection('offers').insertOne(newOffer);

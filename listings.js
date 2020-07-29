@@ -25,34 +25,33 @@ async function list(_, {
     .limit(PAGE_SIZE);
 
   const totalCount = await cursor.count(false);
-  const listingitems = cursor.toArray();
+  const listings = cursor.toArray();
   const pages = Math.ceil(totalCount / PAGE_SIZE);
-  return { listingitems, pages };
+  return { listings, pages };
 }
 
-async function add(_, { issue: listing }) {
+async function add(_, { listing }) {
   const db = getDb();
-  // validate(issue);
-
   const newListing = Object.assign({}, listing);
+
   newListing.created = new Date();
   newListing.status = 'New';
   newListing.id = await getNextSequence('listings');
 
   const result = await db.collection('listings').insertOne(newListing);
-  const savedListing = await db.collection('listings')
-    .findOne({ _id: result.insertedId });
+  const savedListing = await db.collection('listings').findOne({ _id: result.insertedId });
   return savedListing;
 }
 
 async function update(_, { id, changes }) {
   const db = getDb();
-  if (changes.productId || changes.status || changes.productCount || changes.note ||
-    changes.expired || changes.priceList) {
+
+  if (changes.productId || changes.status || changes.productCount
+      || changes.note || changes.expired || changes.priceList) {
     const listing = await db.collection('listings').findOne({ id });
     Object.assign(listing, changes);
-    // validate(issue);
   }
+
   await db.collection('listings').updateOne({ id }, { $set: changes });
   const savedListing = await db.collection('listings').findOne({ id });
   return savedListing;
@@ -61,6 +60,7 @@ async function update(_, { id, changes }) {
 async function remove(_, { id }) {
   const db = getDb();
   const listing = await db.collection('listings').findOne({ id });
+
   if (!listing) return false;
   listing.deleted = new Date();
 
@@ -75,6 +75,7 @@ async function remove(_, { id }) {
 async function restore(_, { id }) {
   const db = getDb();
   const listing = await db.collection('deleted_listings').findOne({ id });
+
   if (!listing) return false;
   listing.deleted = new Date();
 
