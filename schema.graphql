@@ -12,21 +12,21 @@ enum OfferStatus {
 }
 
 type ListingPrice {
-  product_id: String!
-  product_count: Int!
+  productId: String!
+  productCount: Int!
 }
 
 type Listing {
   _id: ID!
   id: Int!
   status: ListingStatus!
-  seller_id: Int!
-  product_id: String!
-  product_count: Int!
+  sellerId: Int!
+  productId: String!
+  productCount: Int!
   created: GraphQLDate!
   expired: GraphQLDate
   note: String
-  price_list: [ListingPrice!]!
+  priceList: [ListingPrice!]!
 }
 
 type ListingListWithPages {
@@ -38,11 +38,11 @@ type Offer {
   _id: ID!
   id: Int!
   status: OfferStatus!
-  listing_id: Int!
-  seller_id: Int!
-  buyer_id: Int!
-  product_id: String!
-  product_count: Int!
+  listingId: Int!
+  sellerId: Int!
+  buyerId: Int!
+  productId: String!
+  productCount: Int!
 }
 
 type OfferListWithPages {
@@ -56,9 +56,9 @@ type User {
   signedIn: Boolean!
   email: String!
   username: String
-  switch_id: String
-  island_name: String
-  villager_list: [String!]
+  switchId: String
+  islandName: String
+  villagerList: [String!]
   wishlist: [String!]
 }
 
@@ -69,56 +69,56 @@ type UserListWithPages {
 
 "For Mutation"
 input ListingPriceInputs {
-  product_id: String!
-  product_count: Int!
+  productId: String!
+  productCount: Int!
 }
 
 input ListingInputs {
-  seller_id: Int!
-  product_id: String!
-  product_count: Int!
+  sellerId: Int!
+  productId: String!
+  productCount: Int!
   expired: GraphQLDate
   note: String
-  price_list: [ListingPriceInputs!]!
+  priceList: [ListingPriceInputs!]!
 }
 
 input ListingUpdateInputs {
   status: ListingStatus
-  product_id: String
-  product_count: Int
+  productId: String
+  productCount: Int
   expired: GraphQLDate
   note: String
-  price_list: [ListingPriceInputs!]
+  priceList: [ListingPriceInputs!]
 }
 
 input OfferInputs {
-  listing_id: Int!
-  seller_id: Int!
-  buyer_id: Int!
-  product_id: String!
-  product_count: Int!
+  listingId: Int!
+  sellerId: Int!
+  buyerId: Int!
+  productId: String!
+  productCount: Int!
 }
 
 input OfferUpdateInputs {
   status: OfferStatus
-  product_id: String
-  product_count: Int
+  productId: String
+  productCount: Int
 }
 
 input UserInputs {
   email: String!
   username: String
-  switch_id: String
-  island_name: String
-  villager_list: [String!]
+  switchId: String
+  islandName: String
+  villagerList: [String!]
   wishlist: [String!]
 }
 
 input UserUpdateInputs {
   username: String
-  switch_id: String
-  island_name: String
-  villager_list: [String!]
+  switchId: String
+  islandName: String
+  villagerList: [String!]
   wishlist: [String!]
 }
 
@@ -182,17 +182,17 @@ type Query {
   listing: Listing!
   listingList(
     status: ListingStatus
-    seller_id: Int
-    product_id: String
+    sellerId: Int
+    productId: String
     created: GraphQLDate
     expired: GraphQLDate
   ): ListingListWithPages
   offer: Offer!
   offerList(
     status: OfferStatus
-    listing_id: Int
-    seller_id: Int
-    buyer_id: Int
+    listingId: Int
+    sellerId: Int
+    buyerId: Int
   ): ListingListWithPages
   user: User!
   userList(
