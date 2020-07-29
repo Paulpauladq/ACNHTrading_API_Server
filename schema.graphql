@@ -175,9 +175,18 @@ type NookmileListWithPages {
   pages: Int
 }
 
+"For google auth api"
+type User {
+  signedIn: Boolean!
+  givenName: String
+  name: String
+  email: String
+}
+
 ##### Top level declarations
 type Query {
   about: String!
+  user: User!
   listing: Listing!
   listingList(
     status: ListingStatus

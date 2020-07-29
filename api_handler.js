@@ -4,23 +4,46 @@ const { ApolloServer } = require('apollo-server-express');
 
 const GraphQLDate = require('./graphql_date.js');
 const about = require('./about.js');
-const issue = require('./issue.js');
 const auth = require('./auth.js');
+const listing = require('./listing.js');
+const offer = require('./offer.js');
+const acnher = require('./acnher.js');
+const item = require('./item.js');
+const recipe = require('./recipe.js');
+const villager = require('./villager.js');
+const nookmile = require('./nookmile.js');
 
 const resolvers = {
   Query: {
     about: about.getMessage,
     user: auth.resolveUser,
-    issueList: issue.list,
-    issue: issue.get,
-    issueCounts: issue.counts,
+    listing: listing.get,
+    listingList: listing.list,
+    offer: offer.get,
+    offerList: offer.list,
+    acnher: acnher.get,
+    acnherList: acnher.list,
+    item: item.get,
+    itemList: item.list,
+    recipe: recipe.get,
+    recipeList: recipe.list,
+    villager: villager.get,
+    villagerList: villager.list,
+    nookmile: nookmile.get,
+    nookmileList: nookmile.list,
   },
   Mutation: {
     setAboutMessage: about.setMessage,
-    issueAdd: issue.add,
-    issueUpdate: issue.update,
-    issueDelete: issue.delete,
-    issueRestore: issue.restore,
+    listingAdd: listing.add,
+    listingUpdate: listing.update,
+    listingDelete: listing.delete,
+    listingRestore: listing.restore,
+    offerAdd: offer.add,
+    offerUpdate: offer.update,
+    offerDelete: offer.delete,
+    offerRestore: offer.restore,
+    acnherAdd: acnher.add,
+    acnherUpdate: acnher.update,
   },
   GraphQLDate,
 };
