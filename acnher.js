@@ -7,7 +7,7 @@ async function get(_, { id }) {
   return acnher;
 }
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 24;
 
 async function list(_, {
   search, page,

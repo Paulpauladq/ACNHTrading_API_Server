@@ -6,7 +6,7 @@ async function get(_, { uniqueEntryId }) {
   return villager;
 }
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 24;
 
 async function list(_, {
   personality, species, search, page,
