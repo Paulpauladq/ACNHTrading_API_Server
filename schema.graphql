@@ -123,7 +123,7 @@ input AcnherUpdateInputs {
 
 "Data for Animal Crossing New Horizons"
 type itemVariant {
-  image: String!
+  image: String
   uniqueEntryId: String!
 }
 
