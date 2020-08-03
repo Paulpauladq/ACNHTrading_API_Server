@@ -4,6 +4,11 @@
 * Shengfu Zhang
 * Ziqi Tang
 
+## Useful Links
+* Links to API Repo: https://github.ccs.neu.edu/NEU-CS5610-SU20/GroupProject_ppttptsfzzsf_API.git
+* Links to UI Repo: https://github.ccs.neu.edu/NEU-CS5610-SU20/GroupProject_ppttptsfzzsf_UI.git
+* Links to Heroku Page: https://acnh-trading-ui.herokuapp.com/
+
 ## Iterations 1 Progress
 * We used book project as the boilerplate code and build our projects on top of that.
 * We found the Animal Crossing New Horizon product spreadsheet dataset and use Json 
