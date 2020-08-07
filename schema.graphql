@@ -11,6 +11,11 @@ enum OfferStatus {
   Accepted
 }
 
+enum AcnherLookupType {
+  id
+  email
+}
+
 type ListingPrice {
   productId: String!
   productCount: Int!
@@ -53,7 +58,6 @@ type OfferListWithPages {
 type Acnher {
   _id: ID!
   id: Int!
-  signedIn: Boolean!
   email: String!
   nickname: String
   switchId: String
@@ -206,7 +210,10 @@ type Query {
     buyerId: Int
     page: Int = 1
   ): OfferListWithPages
-  acnher(id: Int!): Acnher!
+  acnher(
+    lookup: String!
+    lookupType: AcnherLookupType!
+  ): Acnher!
   acnherList(
     search: String
     page: Int = 1
