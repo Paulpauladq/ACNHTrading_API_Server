@@ -21,8 +21,11 @@ type Listing {
   id: Int!
   status: ListingStatus!
   sellerId: Int!
+  sellerName: String!
   productId: String!
+  productName: String!
   productCount: Int!
+  thumbnail: String!
   created: GraphQLDate!
   note: String
   priceList: [ListingPrice!]!
@@ -195,6 +198,7 @@ type Query {
     status: ListingStatus
     sellerId: Int
     productId: String
+    search: String
     page: Int = 1
   ): ListingListWithPages
   offer(id: Int!): Offer!

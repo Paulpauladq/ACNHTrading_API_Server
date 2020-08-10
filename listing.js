@@ -10,7 +10,7 @@ async function get(_, { id }) {
 const PAGE_SIZE = 24;
 
 async function list(_, {
-  status, sellerId, productId, page,
+  status, sellerId, productId, search, page,
 }) {
   const db = getDb();
   const filter = {};
@@ -18,6 +18,7 @@ async function list(_, {
   if (status) filter.status = status;
   if (sellerId) filter.sellerId = sellerId;
   if (productId) filter.productId = sellerId;
+  if (search) filter.$text = { $search: search };
 
   const cursor = db.collection('listings').find(filter)
     .sort({ id: -1 })

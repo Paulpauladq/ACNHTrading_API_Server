@@ -29,8 +29,11 @@ const listingsDB = [
     id: 1,
     status: 'New',
     sellerId: 1,
+    sellerName: 'ppt',
     productId: 'EpywQXABBcv2dipsP',
+    productName: 'acoustic guitar',
     productCount: 1,
+    thumbnail: 'https://acnhcdn.com/latest/FtrIcon/FtrAcorsticguitar_Remake_0_0.png',
     created: new Date('2020-07-13'),
     expired: undefined,
     note: 'Don\'t send me empty offers.',
@@ -53,8 +56,11 @@ const listingsDB = [
     id: 2,
     status: 'New',
     sellerId: 2,
+    sellerName: 'sfz',
     productId: 'XAnaYsJ8wouWyBBsu',
+    productName: 'antique wardrobe',
     productCount: 3,
+    thumbnail: 'https://acnhcdn.com/latest/FtrIcon/FtrAntiqueChest_Remake_0_0.png',
     created: new Date('2020-07-15'),
     expired: undefined,
     note: 'Yohooooooooo',
@@ -73,8 +79,11 @@ const listingsDB = [
     id: 3,
     status: 'Closed',
     sellerId: 1,
+    sellerName: 'ppt',
     productId: '54WzSWz3bv4j4279w',
+    productName: 'antique clock',
     productCount: 1,
+    thumbnail: 'https://acnhcdn.com/latest/FtrIcon/FtrAntiqueClock_Remake_0_0.png',
     created: new Date('2020-07-10'),
     expired: undefined,
     note: 'Accepting touch trade',
@@ -157,9 +166,14 @@ db.counters.insert({ _id: 'acnhers', current: acnherCount });
 db.listings.createIndex({ id: 1 }, { unique: true });
 db.listings.createIndex({ status: 1 });
 db.listings.createIndex({ sellerId: 1 });
+db.listings.createIndex({ sellerName: 1 });
 db.listings.createIndex({ productId: 1 });
+db.listings.createIndex({ productName: 1 });
 db.listings.createIndex({ created: 1 });
 db.listings.createIndex({ expired: 1 });
+db.acnhers.createIndex({
+  sellerName: 'text', productName: 'text',
+});
 
 db.deleted_listings.createIndex({ id: 1 }, { unique: true });
 
@@ -173,6 +187,7 @@ db.deleted_offers.createIndex({ id: 1 }, { unique: true });
 
 db.acnhers.createIndex({ id: 1 }, { unique: true });
 db.acnhers.createIndex({ nickname: 1 });
+db.acnhers.createIndex({ islandName: 1 });
 db.acnhers.createIndex({ email: 1 }, { unique: true });
 db.acnhers.createIndex({ switchId: 1 });
 db.acnhers.createIndex({
