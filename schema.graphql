@@ -11,11 +11,6 @@ enum OfferStatus {
   Accepted
 }
 
-enum AcnherLookupType {
-  id
-  email
-}
-
 type ListingPrice {
   productId: String!
   productCount: Int!
@@ -210,10 +205,7 @@ type Query {
     buyerId: Int
     page: Int = 1
   ): OfferListWithPages
-  acnher(
-    lookup: String!
-    lookupType: AcnherLookupType!
-  ): Acnher!
+  acnher(email: String!): Acnher!
   acnherList(
     search: String
     page: Int = 1

@@ -174,7 +174,7 @@ db.deleted_offers.createIndex({ id: 1 }, { unique: true });
 db.acnhers.createIndex({ id: 1 }, { unique: true });
 db.acnhers.createIndex({ nickname: 1 });
 db.acnhers.createIndex({ email: 1 }, { unique: true });
-db.acnhers.createIndex({ switchId: 1 }, { unique: true });
+db.acnhers.createIndex({ switchId: 1 });
 db.acnhers.createIndex({
   nickname: 'text', email: 'text', switchId: 'text', islandName: 'text',
 });
