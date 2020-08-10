@@ -1,9 +1,14 @@
 const { getDb, getNextSequence } = require('./db.js');
 const { mustBeSignedIn } = require('./auth.js');
 
-async function get(_, { email }) {
+async function get(_, { lookup, lookupType }) {
   const db = getDb();
-  const ancher = await db.collection('acnhers').findOne({ email });
+  let ancher = null;
+  if (lookupType === 'id') {
+    ancher = await db.collection('acnhers').findOne({ id: parseInt(lookup, 10) });
+  } else if (lookupType === 'email') {
+    ancher = await db.collection('acnhers').findOne({ email: lookup });
+  }
   return ancher;
 }
 
