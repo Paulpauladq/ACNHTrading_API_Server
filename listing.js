@@ -90,7 +90,7 @@ async function restore(_, { id }) {
 
 module.exports = {
   list,
-  add: mustBeSignedIn(add),
+  add,
   get,
   update: mustBeSignedIn(update),
   delete: mustBeSignedIn(remove),

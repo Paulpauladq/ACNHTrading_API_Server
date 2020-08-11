@@ -83,15 +83,17 @@ input ListingPriceInputs {
 
 input ListingInputs {
   sellerId: Int!
+  sellerName: String!
   productId: String!
+  productName: String!
   productCount: Int!
+  thumbnail: String!
   note: String
   priceList: [ListingPriceInputs!]!
 }
 
 input ListingUpdateInputs {
   status: ListingStatus
-  productId: String
   productCount: Int
   note: String
   priceList: [ListingPriceInputs!]

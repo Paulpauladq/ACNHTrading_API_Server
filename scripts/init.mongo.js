@@ -43,11 +43,11 @@ const listingsDB = [
         productCount: 1000000,
       },
       {
-        productId: 'FAn9xRZvpBRAad3E6',
+        productId: 'nmt',
         productCount: 20,
       },
       {
-        productId: 'J4inuBziPCSGZNEPM',
+        productId: 'wishlist',
         productCount: 2,
       },
     ],
@@ -66,11 +66,11 @@ const listingsDB = [
     note: 'Yohooooooooo',
     priceList: [
       {
-        productId: 'FAn9xRZvpBRAad3E6',
+        productId: 'nmt',
         productCount: 20,
       },
       {
-        productId: 't2LzAKDofAZYyqZ6r',
+        productId: 'wishlist',
         productCount: 2,
       },
     ],
@@ -89,7 +89,7 @@ const listingsDB = [
     note: 'Accepting touch trade',
     priceList: [
       {
-        productId: '6wyLNus8QqXkbBu72',
+        productId: 'wishlist',
         productCount: 1,
       },
     ],
