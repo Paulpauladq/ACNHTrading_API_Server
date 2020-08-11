@@ -17,7 +17,7 @@ async function list(_, {
 
   if (status) filter.status = status;
   if (sellerId) filter.sellerId = sellerId;
-  if (productId) filter.productId = sellerId;
+  if (productId) filter.productId = productId;
   if (search) filter.$text = { $search: search };
 
   const cursor = db.collection('listings').find(filter)
