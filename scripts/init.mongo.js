@@ -103,8 +103,9 @@ const offersDB = [
     listingId: 2,
     sellerId: 2,
     buyerId: 1,
-    productId: 'FAn9xRZvpBRAad3E6',
+    productId: 'wishlist',
     productCount: 20,
+    created: new Date('2020-07-10'),
   },
   {
     id: 2,
@@ -112,8 +113,9 @@ const offersDB = [
     listingId: 3,
     sellerId: 1,
     buyerId: 2,
-    productId: '6wyLNus8QqXkbBu72',
+    productId: 'nmt',
     productCount: 1,
+    created: new Date('2020-07-10'),
   },
   {
     id: 3,
@@ -123,6 +125,7 @@ const offersDB = [
     buyerId: 2,
     productId: 'bell',
     productCount: 1000000,
+    created: new Date('2020-07-10'),
   },
 ];
 
