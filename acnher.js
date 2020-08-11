@@ -2,9 +2,6 @@ const { getDb, getNextSequence } = require('./db.js');
 const { mustBeSignedIn } = require('./auth.js');
 
 async function get(_, { lookup, lookupType }) {
-  console.log(`!!!!!!!!!!${lookup}`);
-  console.log(`!!!!!!!!!!${lookupType}`);
-
   const db = getDb();
   let ancher = null;
   if (lookupType === 'id') {
