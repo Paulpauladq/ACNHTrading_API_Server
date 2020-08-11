@@ -135,7 +135,7 @@ const acnhersDB = [
     islandName: 'ppt_island',
     villagerList: ['B3RyfNEqwGmcccRC3'],
     wishlist: ['QiRLGPEKXAy9CnsnD', 'EFHuxMqC34e4se2EB', 'dRTnqq9pYTtLGmZZt'],
-    created: '2020-08-10T14:47:51.928+00:00',
+    created: new Date('2020-07-13'),
   },
   {
     id: 2,
@@ -145,7 +145,7 @@ const acnhersDB = [
     islandName: 'sfz_island',
     villagerList: ['SGMdki6dzpDZyXAw5'],
     wishlist: ['dRTnqq9pYTtLGmZZt', 'ihA8W7QC64yvcX4Dd', 'hyZvWM6kXL5S7qcbN'],
-    created: '2020-08-10T14:47:51.928+00:00',
+    created: new Date('2020-07-13'),
   },
 ];
 
