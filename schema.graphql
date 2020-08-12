@@ -62,7 +62,7 @@ type Acnher {
   _id: ID!
   id: Int!
   email: String!
-  nickname: String
+  nickname: String!
   switchId: String
   islandName: String
   villagerList: [String!]
