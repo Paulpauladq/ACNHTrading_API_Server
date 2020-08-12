@@ -137,8 +137,24 @@ const acnhersDB = [
     switchId: '1111-1111-1111',
     islandName: 'ppt_island',
     villagerList: ['B3RyfNEqwGmcccRC3'],
-    wishlist: ['QiRLGPEKXAy9CnsnD', 'EFHuxMqC34e4se2EB', 'dRTnqq9pYTtLGmZZt'],
     created: new Date('2020-07-13'),
+    wishlist: [
+      {
+        uniqueEntryId: 'QiRLGPEKXAy9CnsnD',
+        itemName: 'Celeste\'s poster',
+        thumbnail: 'https://acnhcdn.com/latest/FtrIcon/PosterNpcSpOws.png',
+      },
+      {
+        uniqueEntryId: 'EFHuxMqC34e4se2EB',
+        itemName: 'Cinnamoroll poster',
+        thumbnail: 'https://acnhcdn.com/latest/FtrIcon/PosterNpcNmlElp11.png',
+      },
+      {
+        uniqueEntryId: 'dRTnqq9pYTtLGmZZt',
+        itemName: 'Croque\'s poster',
+        thumbnail: 'https://acnhcdn.com/latest/FtrIcon/PosterNpcNmlFlg17.png',
+      },
+    ],
   },
   {
     id: 2,
@@ -147,8 +163,24 @@ const acnhersDB = [
     switchId: '2222-2222-2222',
     islandName: 'sfz_island',
     villagerList: ['SGMdki6dzpDZyXAw5'],
-    wishlist: ['dRTnqq9pYTtLGmZZt', 'ihA8W7QC64yvcX4Dd', 'hyZvWM6kXL5S7qcbN'],
     created: new Date('2020-07-13'),
+    wishlist: [
+      {
+        uniqueEntryId: 'dRTnqq9pYTtLGmZZt',
+        itemName: 'Croque\'s poster',
+        thumbnail: 'https://acnhcdn.com/latest/FtrIcon/PosterNpcNmlFlg17.png',
+      },
+      {
+        uniqueEntryId: 'ihA8W7QC64yvcX4Dd',
+        itemName: 'Deli\'s poster',
+        thumbnail: 'https://acnhcdn.com/latest/FtrIcon/PosterNpcNmlMnk08.png',
+      },
+      {
+        uniqueEntryId: 'hyZvWM6kXL5S7qcbN',
+        itemName: 'Dom\'s poster',
+        thumbnail: 'https://acnhcdn.com/latest/FtrIcon/PosterNpcNmlShp15.png',
+      },
+    ],
   },
 ];
 

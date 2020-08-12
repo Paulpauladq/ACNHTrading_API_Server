@@ -58,6 +58,12 @@ type OfferListWithPages {
   pages: Int
 }
 
+type WishlistItem {
+  uniqueEntryId: String!
+  itemName: String!
+  thumbnail: String!
+}
+
 type Acnher {
   _id: ID!
   id: Int!
@@ -66,7 +72,7 @@ type Acnher {
   switchId: String
   islandName: String
   villagerList: [String!]
-  wishlist: [String!]
+  wishlist: [WishlistItem!]
   created: GraphQLDate!
 }
 
@@ -113,13 +119,19 @@ input OfferUpdateInputs {
   productCount: Int
 }
 
+input WishlistItemInputs {
+  uniqueEntryId: String!
+  itemName: String!
+  thumbnail: String!
+}
+
 input AcnherInputs {
   email: String!
   nickname: String
   switchId: String
   islandName: String
   villagerList: [String!]
-  wishlist: [String!]
+  wishlist: [WishlistItemInputs!]
 }
 
 input AcnherUpdateInputs {
@@ -127,12 +139,12 @@ input AcnherUpdateInputs {
   switchId: String
   islandName: String
   villagerList: [String!]
-  wishlist: [String!]
+  wishlist: [WishlistItemInputs!]
 }
 
 "Data for Animal Crossing New Horizons"
 type itemVariant {
-  image: String
+  image: String!
   uniqueEntryId: String!
 }
 
